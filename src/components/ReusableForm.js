@@ -10,11 +10,11 @@ function ReusableForm(props) {
           name='name'
           placeholder='Item name' />
         <input
-          type='text'
+          type='number'
           name='price'
           placeholder='Enter price per oz' />
         <input
-          type='text'
+          type='number'
           name='quantity'
           placeholder='Enter quantity in oz' />
         <input
