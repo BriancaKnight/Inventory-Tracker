@@ -18,7 +18,7 @@ Item.propTypes = {
   price: PropTypes.number,
   quantity: PropTypes.number,
   description: PropTypes.string,
-  id: PropTypes.number,
+  id: PropTypes.string,
   whenItemClicked: PropTypes.func,
 };
 
