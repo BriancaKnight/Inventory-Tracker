@@ -43,9 +43,17 @@ class ItemControl extends React.Component {
   }
 
   handleChangingSelectedItem = (id) => {
-    const selectedItem = this.state.mainItemList.filter(item => item.id === id)[0];
+    const selectedItem = this.state.mainItemList.find(item => item.id === id);
     this.setState({ selectedItem: selectedItem });
-  }
+  };
+
+  updateMainItemList = (itemId, newQuantity) => {
+    this.setState(prevState => ({
+      mainItemList: prevState.mainItemList.map(item =>
+        item.id === itemId ? { ...item, quantity: newQuantity } : item
+      )
+    }));
+  };
 
   handleEditClick = () => {
     this.setState({ editing: true });
@@ -53,11 +61,11 @@ class ItemControl extends React.Component {
 
   handleEditingItemInList = (itemToEdit) => {
     const editedMainItemList = this.state.mainItemList.map((item) => {
-    if (item.id === itemToEdit.id) {
-      return itemToEdit;
-    }
-    return item;
-  });
+      if (item.id === itemToEdit.id) {
+        return itemToEdit;
+      }
+      return item;
+    });
 
     this.setState({
       mainItemList: editedMainItemList,
@@ -77,8 +85,8 @@ class ItemControl extends React.Component {
             item={this.state.selectedItem} />
           <EditItemForm
             item={this.state.selectedItem}
-            onEditItem={this.handleEditingItemInList} 
-            />
+            onEditItem={this.handleEditingItemInList}
+          />
         </React.Fragment>
       buttonText = "Return to Shop"
     }
@@ -88,6 +96,7 @@ class ItemControl extends React.Component {
           <ItemDetail
             item={this.state.selectedItem}
             onClickingEdit={this.handleEditClick}
+            updateMainItemList={this.updateMainItemList}
           />
           <ReusableButton
             onClick={this.handleEditClick}

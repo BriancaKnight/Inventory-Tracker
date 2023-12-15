@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import ReusableButton from './ReusableButton';
 
 function ItemDetail(props){
-  const {item, onClickingEdit} = props;
+  const {item, onClickingEdit, updateMainItemList} = props;
   const [itemQuantity, setItemQuantity] = useState(item.quantity);
 
-  const updateItemQuantity = (newQuantiity) => {
-    setItemQuantity(newQuantiity);
+  const updateItemQuantity = (newQuantity) => {
+    setItemQuantity(newQuantity);
+    updateMainItemList(item.id, newQuantity)
   };
 
 const handleBuy = () => {
@@ -35,6 +36,7 @@ const notEnoughStock = itemQuantity < 10
 ItemDetail.propTypes = {
   item: PropTypes.object,
   onClickingEdit: PropTypes.func,
+  updateMainItemList: PropTypes.func,
 }
 
 export default ItemDetail;
